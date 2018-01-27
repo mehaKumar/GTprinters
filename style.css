@@ -2,3 +2,9 @@ body {
     font-family: 'Open Sans', sans-serif;
     margin: 0em;
 }
+
+#issue {
+    background-color: #FFFACD;
+    color: white;
+    text-align: center;
+}
