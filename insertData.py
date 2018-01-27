@@ -34,7 +34,7 @@ def main():
     conn = create_connection(database)
     with conn:
         # create a new issue
-        issue = (20180127, 'Klaus printer', 'out of paper');
+        issue = (20180131, 'CULC printer', 'Out of Paper');
         issue_id = create_issue(conn, issue)
 
 if __name__ == '__main__':

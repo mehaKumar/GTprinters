@@ -17,14 +17,14 @@ def create_connection(db_file):
     return None
 
 
-def select_all_tasks(conn):
+def select_all_issues(conn):
     """
     Query all rows in the tasks table
     :param conn: the Connection object
     :return:
     """
     cur = conn.cursor()
-    cur.execute("SELECT * FROM tasks")
+    cur.execute("SELECT * FROM tickets")
 
     rows = cur.fetchall()
 
@@ -32,7 +32,7 @@ def select_all_tasks(conn):
         print(row)
 
 
-def select_task_by_priority(conn, priority):
+def select_recent_issues(conn):
     """
     Query tasks by priority
     :param conn: the Connection object
@@ -40,7 +40,7 @@ def select_task_by_priority(conn, priority):
     :return:
     """
     cur = conn.cursor()
-    cur.execute("SELECT * FROM tasks WHERE priority=?", (priority,))
+    cur.execute("SELECT * FROM tickets WHERE timestamp>20180120")
 
     rows = cur.fetchall()
 
@@ -49,16 +49,16 @@ def select_task_by_priority(conn, priority):
 
 
 def main():
-    database = "C:\\sqlite\db\pythonsqlite.db"
+    database = "Printer_Data.db"
 
     # create a database connection
     conn = create_connection(database)
     with conn:
-        print("1. Query task by priority:")
-        select_task_by_priority(conn,1)
+        print("1. Query issues by data (recent ones only):")
+        select_recent_issues(conn)
 
         print("2. Query all tasks")
-        select_all_tasks(conn)
+        select_all_issues(conn)
 
 
 if __name__ == '__main__':
