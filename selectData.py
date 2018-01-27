@@ -41,7 +41,7 @@ def select_recent_issues(conn):
     :return:
     """
     cur = conn.cursor()
-    dateCutoff = (datetime.datetime.now() - datetime.timedelta(seconds = 3))
+    dateCutoff = (datetime.datetime.now() - datetime.timedelta(seconds = 10))
     dateCutoff = dateCutoff.strftime("%Y%m%d%H%M%S")
     cur.execute("SELECT * FROM tickets WHERE timestamp > "+ dateCutoff)
 
