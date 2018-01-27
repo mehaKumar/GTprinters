@@ -1,10 +1,9 @@
 import sqlite3
 from sqlite3 import Error
-import datetime
 
 def create_connection(db_file):
     """ create a database connection to the SQLite database
-        specified by db_file
+        specified by the db_file
     :param db_file: database file
     :return: Connection object or None
     """
@@ -16,17 +15,15 @@ def create_connection(db_file):
 
     return None
 
-def create_issue(conn, issue):
+def delete_all_tasks(conn):
     """
-    Create a new issue into the tickets table
-    :param conn:
-    :param issue:
-    :return: issue id
+    Delete all rows in the tasks table
+    :param conn: Connection to the SQLite database
+    :return:
     """
-    sql =  "INSERT INTO tickets(timestamp, printer, issue)" + "VALUES(?,?,?)"
+    sql = 'DELETE FROM tickets'
     cur = conn.cursor()
-    cur.execute(sql, issue)
-    return cur.lastrowid
+    cur.execute(sql)
 
 def main():
     database = "Printer_Data.db"
@@ -34,9 +31,8 @@ def main():
     # create a database connection
     conn = create_connection(database)
     with conn:
-        # create a new issue
-        issue = (datetime.datetime.now().strftime("%Y%m%d%H%M%S"), 'CULC printer', 'Out of Paper')
-        issue_id = create_issue(conn, issue)
+        delete_all_tasks(conn);
+
 
 if __name__ == '__main__':
     main()

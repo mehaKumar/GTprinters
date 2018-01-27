@@ -1,5 +1,6 @@
 import sqlite3
 from sqlite3 import Error
+import datetime
 
 
 def create_connection(db_file):
@@ -40,7 +41,9 @@ def select_recent_issues(conn):
     :return:
     """
     cur = conn.cursor()
-    cur.execute("SELECT * FROM tickets WHERE timestamp>20180120")
+    dateCutoff = (datetime.datetime.now() - datetime.timedelta(seconds = 3))
+    dateCutoff = dateCutoff.strftime("%Y%m%d%H%M%S")
+    cur.execute("SELECT * FROM tickets WHERE timestamp > "+ dateCutoff)
 
     rows = cur.fetchall()
 
