@@ -1,0 +1,9 @@
+MANIFEST.in
+GTprinters/GTprinters.py
+GTprinters/__init__.py
+GTprinters/schema.sql
+GTprinters.egg-info/PKG-INFO
+GTprinters.egg-info/SOURCES.txt
+GTprinters.egg-info/dependency_links.txt
+GTprinters.egg-info/requires.txt
+GTprinters.egg-info/top_level.txt
