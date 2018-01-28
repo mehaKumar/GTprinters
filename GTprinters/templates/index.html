@@ -5,7 +5,7 @@ xhtml">
 
 <title>Report a printer issue</title>
 
-<link type="text/css" rel="stylesheet" href="style.css" media="screen,projection"/>
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" media="screen,projection"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
@@ -18,10 +18,21 @@ xhtml">
         <button type="button" class="button" onclick="alert('Thanks!')">Jammed</button>
     </div> -->
 
-    <form action="{{ url_for('add_entry') }}" method=post>
-        <input name="issue" value="Out Of Paper" type="submit">
-        <input type="hidden" name="timestamp" value=Date.now()>
+    <form action="{{ url_for('add_entry') }}" method="post">
+        <input name="issue" value="Out Of Paper" type="text">
+        <input type="hidden" name="timestamp" id="dateBox">
         <input type="hidden" name="printer" value="CULC printer!">
+        <input type="submit" value="Submit">
     </form>
-
+    <br>
+    <p> entries so far</p>
+    {% for entry in tickets %}
+    <li><h2>{{ entry.timestamp }}</h2>{{ entry.printer }} {{entry.issue}}
+    {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+    {% endfor %}
+<script type="text/javascript">
+    console.log("found ddate" + Date.now().valueOf())
+    document.getElementById("dateBox").value = Date.now().valueOf()
+</script>
 </body>

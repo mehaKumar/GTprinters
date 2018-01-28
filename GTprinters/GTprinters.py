@@ -10,6 +10,7 @@ app.config.from_object(__name__) # load config from this file
 # Load default config and override config from an environment variable
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'Printer_Data.db'),
+    SECRET_KEY='sossecret'
 ))
 app.config.from_envvar('GTPRINTERS_SETTINGS', silent=True)
 
@@ -21,6 +22,7 @@ def create_connection(db_file):
     """
     try:
         conn = sqlite3.connect(db_file)
+        conn.row_factory = sqlite3.Row
         return conn
     except Error as e:
         print(e)
@@ -56,11 +58,11 @@ def close_db(error):
 @app.route('/')
 def show_entries():
     db = get_db()
-    cur = db.execute('select title, text from entries order by timestamp desc')
-    entries = cur.fetchall()
-    return render_template('show_entries.html', entries=entries)
+    cur = db.execute('select * from tickets order by timestamp desc')
+    tickets = cur.fetchall()
+    return render_template('index.html', tickets=tickets)
 
-@app.route('/add', methods=['POST'])
+@app.route('/add_entry', methods=['POST'])
 def add_entry():
     db = get_db()
     db.execute("INSERT INTO tickets(timestamp, printer, issue) " + "VALUES(?,?,?)",
