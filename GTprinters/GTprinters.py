@@ -29,6 +29,7 @@ def create_connection(db_file):
     except Error as e:
         print(e)
 
+
     return None
 
 def init_db():
@@ -48,7 +49,7 @@ def get_db():
     current application context.
     """
     if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = create_connection("/home/mkumar77/GTprinters/Printer_Data.db")
+        g.sqlite_db = create_connection("../Printer_Data.db")
     return g.sqlite_db
 
 @app.teardown_appcontext
@@ -60,8 +61,9 @@ def close_db(error):
 @app.route('/')
 def show_entries():
     db = get_db()
-    cur = db.execute('SELECT printer, count(*) as NUM FROM tickets GROUP BY printer')
+    cur = db.execute('SELECT DISTINCT printer FROM tickets GROUP BY printer')
     tickets = cur.fetchall()
+    # printers  = cur.fetchall()
     return render_template('index.html', tickets=tickets)
 
 @app.route('/issue')
@@ -71,8 +73,8 @@ def show_issue():
 @app.route('/add_entry', methods=['POST'])
 def add_entry():
     db = get_db()
-    db.execute("INSERT INTO tickets(timestamp, printer, issue) " + "VALUES(?,?,?)",
-                 [request.form['timestamp'], request.form['printer'], request.form['issue']])
+    db.execute("INSERT INTO tickets(timestamp, printer, issue, date) " + "VALUES(?,?,?,?)",
+                 [datetime.datetime.now(), request.form['printer'], request.form['issue'], datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
     db.commit()
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
