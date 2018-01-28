@@ -3,52 +3,19 @@
 xhtml">
 <head>
 
-<title>Report a printer issue</title>
+<title>GT Printers</title>
 
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" media="screen,projection"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
 <body>
-
-<div id="issue">
-    <h1>Problem with this printer?</h1>
-    <p> Tell us the issue by pressing a button below.</p>
-    <form action="{{ url_for('add_entry') }}" method="post">
-        <!-- <input name="issue" value="Out Of Paper" type="text"> -->
-        <input type="hidden" name="timestamp" id="dateBox">
-        <input type="hidden" name="printer" id="printer">
-        <input type="submit" value="Out of Paper" name="issue">
-        <br>
-        <input type="submit" value="Jammed" name="issue">
-    </form>
-</div>
-    <br>
-    <p> entries so far</p>
+ <div id="homepage">
+    <h1>GT Printers</h1>
     {% for entry in tickets %}
-    <li><h2>{{ entry.timestamp }}</h2>{{ entry.printer }} {{entry.issue}}
+    <li>{{ entry.timestamp }}{{ entry.printer }} {{entry.issue}}
     {% else %}
     <li><em>Unbelievable.  No entries here so far</em>
     {% endfor %}
-<script type="text/javascript">
-
-    document.getElementById("dateBox").value = Date.now().valueOf()
-
-    function querySt(ji) {
-
-    hu = window.location.search.substring(1);
-    gy = hu.split("&");
-
-    for (i=0;i<gy.length;i++) {
-        ft = gy[i].split("=");
-        if (ft[0] == ji) {
-            return ft[1];
-        }
-    }
-}
-    var printer = querySt("printer");
-
-    document.getElementById('printer').value = printer;
-    console.log("found printer: " + printer);
-</script>
+    </div>
 </body>
