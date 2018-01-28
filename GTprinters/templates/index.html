@@ -16,18 +16,18 @@ xhtml">
 <body>
  <div id="homepage">
     <h1 style="font-size: 7em; margin-top: 0">GT Printers</h1>
-    <div align= "center" >
+    <div align= "center" style="width: 100%">
     <table style= "font-size: 2em">
         <tr>
-            <th>Location</th>
-            <th>Status</th>
-            <th>Last issue reported</th>
+            <th style="text-align:center;">Location</th>
+            <th style="text-align:left;">Status</th>
+            <th style="text-align:left;">Last issue reported</th>
         </tr>
         {% for entry in tickets %}
         <tr>
-            <th style="text-align:left">{{entry[0]}}</th>
-            <th style="text-align:right">{{entry[1]}}</th>
-            <th style="text-align:right">{{entry[2]}}</th>
+            <td style="text-align:center;">{{entry[0]}}</th>
+            <td style="text-align:left;">{{entry[1]}}</th>
+            <td style="text-align:left;">{{entry[2]}}</th>
         </tr>
         {% endfor %}
     </table>
