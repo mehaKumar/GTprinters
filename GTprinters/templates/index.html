@@ -11,9 +11,9 @@ xhtml">
 
 <body>
  <div id="homepage">
-    <h1>GT Printers</h1>
+    <h1 style="font-size: 4em;">GT Printers</h1>
     {% for entry in tickets %}
-    <li>{{ entry.timestamp }}{{ entry.printer }} {{entry.issue}}
+    <li>{{ entry.printer}}  {{entry.num}} </li>
     {% else %}
     <li><em>Unbelievable.  No entries here so far</em>
     {% endfor %}

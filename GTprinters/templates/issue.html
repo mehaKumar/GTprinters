@@ -18,22 +18,17 @@ xhtml">
         <!-- <input name="issue" value="Out Of Paper" type="text"> -->
         <input type="hidden" name="timestamp" id="dateBox">
         <input type="hidden" name="printer" id="printer">
+        <input type="hidden" name="date" id="date">
         <input type="submit" value="Out of Paper" name="issue">
         <br>
         <input type="submit" value="Jammed" name="issue">
     </form>
 </div>
-    <br>
-    <p> entries so far</p>
-    {% for entry in tickets %}
-    <li><h2>{{ entry.timestamp }}</h2>{{ entry.printer }} {{entry.issue}}
-    {% else %}
-    <li><em>Unbelievable.  No entries here so far</em>
-    {% endfor %}
+
 <script type="text/javascript">
 
-    document.getElementById("dateBox").value = Date.now().valueOf()
-
+    document.getElementById("dateBox").value = Date.now().valueOf();
+    document.getElementById("date").value = Date.now().toString();
     function querySt(ji) {
 
     hu = window.location.search.substring(1);
@@ -47,8 +42,7 @@ xhtml">
     }
 }
     var printer = querySt("printer");
-
-    document.getElementById('printer').value = printer;
     console.log("found printer: " + printer);
+    document.getElementById('printer').value = printer;
 </script>
 </body>

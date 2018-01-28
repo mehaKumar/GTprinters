@@ -1,3 +1,4 @@
+
 body {
     font-family: 'Open Sans', sans-serif;
     margin: 0em;
@@ -15,9 +16,12 @@ p {
     width: 100vw;
     margin-top: 0;
     padding-top: 5em;
-
+    overflow: hidden;
+    position: fixed;
 }
-
+li {
+    list-style-type: none;
+}
 #issue {
     background-color: #EAAA00;
     color: #00254c;
@@ -26,7 +30,8 @@ p {
     width: 100vw;
     margin-top: 0;
     padding-top: 5em;
-
+    overflow: hidden;
+    position: fixed;
 }
 
 input[type=submit] {
