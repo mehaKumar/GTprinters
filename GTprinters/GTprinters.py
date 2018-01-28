@@ -46,7 +46,7 @@ def get_db():
     current application context.
     """
     if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = create_connection("/home/mkumar77/GTprinters/Printer_Data.db")
+        g.sqlite_db = create_connection("../Printer_Data.db")
     return g.sqlite_db
 
 @app.teardown_appcontext
@@ -61,6 +61,10 @@ def show_entries():
     cur = db.execute('select * from tickets order by timestamp desc')
     tickets = cur.fetchall()
     return render_template('index.html', tickets=tickets)
+
+@app.route('/issue')
+def show_issue():
+    return render_template('issue.html')
 
 @app.route('/add_entry', methods=['POST'])
 def add_entry():
