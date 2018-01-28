@@ -18,6 +18,7 @@ xhtml">
         <!-- <input name="issue" value="Out Of Paper" type="text"> -->
         <input type="hidden" name="timestamp" id="dateBox">
         <input type="hidden" name="printer" id="printer">
+        <input type="hidden" name="date" id="date">
         <input type="submit" value="Out of Paper" name="issue">
         <br>
         <input type="submit" value="Jammed" name="issue">
@@ -33,7 +34,7 @@ xhtml">
 <script type="text/javascript">
 
     document.getElementById("dateBox").value = Date.now().valueOf()
-
+    document.getElementById("date").value = Date.now().toString()
     function querySt(ji) {
 
     hu = window.location.search.substring(1);
