@@ -20,12 +20,14 @@ xhtml">
     <table style= "font-size: 2em">
         <tr>
             <th>Location</th>
-            <th>Number of Recent Issues</th>
+            <th>Status</th>
+            <th>Last issue reported</th>
         </tr>
         {% for entry in tickets %}
         <tr>
-            <th style="text-align:left">{{entry.printer}}</th>
-            <th style="text-align:right">{{entry.num}}</th>
+            <th style="text-align:left">{{entry[0]}}</th>
+            <th style="text-align:right">{{entry[1]}}</th>
+            <th style="text-align:right">{{entry[2]}}</th>
         </tr>
         {% endfor %}
     </table>
