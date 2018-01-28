@@ -47,7 +47,7 @@ def get_db():
     current application context.
     """
     if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = create_connection("Printer_Data.db")
+        g.sqlite_db = create_connection("../Printer_Data.db")
     return g.sqlite_db
 
 @app.teardown_appcontext
@@ -73,7 +73,7 @@ def show_issue():
 @app.route('/add_entry', methods=['POST'])
 def add_entry():
     db = get_db()
-    db.execute("INSERT INTO tickets(timestamp, printer, issue) " + "VALUES(?,?,?,?)",
+    db.execute("INSERT INTO tickets(timestamp, printer, issue, date) " + "VALUES(?,?,?,?)",
                  [request.form['timestamp'], request.form['printer'], request.form['issue'], request.form['date']])
     db.commit()
     flash('New entry was successfully posted')
