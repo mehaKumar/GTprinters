@@ -1,6 +1,7 @@
 # all the imports
 import os
 import sqlite3
+from sqlite3 import Error
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 
@@ -46,7 +47,7 @@ def get_db():
     current application context.
     """
     if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = create_connection("../Printer_Data.db")
+        g.sqlite_db = create_connection("/home/mkumar77/GTprinters/Printer_Data.db")
     return g.sqlite_db
 
 @app.teardown_appcontext
