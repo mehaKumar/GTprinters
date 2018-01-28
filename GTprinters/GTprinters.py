@@ -61,24 +61,24 @@ def close_db(error):
 @app.route('/')
 def show_entries():
     db = get_db()
-    cur = db.execute('SELECT * from tickets')
+    cur = db.execute('SELECT distinct printer from tickets')
     printers = cur.fetchall()
     listOfMostRecent = []
     for printer in printers:
-        #curr = db.execute(..)
-        #currDate = printer['date']
-        currTimestamp = printer['timestamp']
+        curr = db.execute('Select max(timestamp) as timestamp, date from tickets where printer = ?',
+            (printer['printer'],));
+        dates = curr.fetchall()
+        dates = dates[0]
+        currDate = dates['date']
+        currTimestamp = dates['timestamp']
         timeDelta = datetime.datetime.now() - datetime.timedelta(hours = 3)
         timeDelta = timeDelta.timestamp() * 1000;
         status = 'Out of Order'
-        print("type of currTimestamp: " + str(type(currTimestamp)) + " " + str(currTimestamp))
         if currTimestamp < int(timeDelta):
             status = 'Running fine'
-        tup = (printer['printer'], status, 'gjg')
-        print(tup)
+        tup = (printer['printer'], status, currDate)
         listOfMostRecent.append(tup)
 
-    print(listOfMostRecent)
     return render_template('index.html', tickets=listOfMostRecent)
 
 @app.route('/issue')
@@ -88,7 +88,6 @@ def show_issue():
 @app.route('/add_entry', methods=['POST'])
 def add_entry():
     db = get_db()
-    print("ATTNATTENTION WHOAHWOAHAHOAH" + str(datetime.datetime.now().timestamp()))
     db.execute("INSERT INTO tickets(timestamp, printer, issue, date) " + "VALUES(?,?,?,?)",
                  [datetime.datetime.now().timestamp(), request.form['printer'], request.form['issue'], datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
     db.commit()
