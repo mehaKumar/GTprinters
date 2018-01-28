@@ -4,6 +4,9 @@ body {
     height: 100%
 }
 
+
+p {
+    font-size: 1.3em; }
 #issue {
     background-color: #EAAA00;
     color: #00254c;
@@ -12,9 +15,11 @@ body {
     width: 100vw;
     margin-top: 0;
     padding-top: 5em;
+
 }
-.button {
-        background-color:  #00263A;
+
+input[type=submit] {
+        background:  #00263A;
         padding: 1em;
         font-size: 30px;
         border: none;
@@ -22,7 +27,8 @@ body {
         border-radius: 4px;
         font-weight: bold;
         margin: .5em;
+        cursor: pointer;
 
-    } .button:hover {
-        background-color: #335170;
+    } input[type=submit]:hover {
+        background: #00254c;
     }

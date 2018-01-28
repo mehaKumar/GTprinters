@@ -11,19 +11,18 @@ xhtml">
 
 <body>
 
-<!--     <div id="issue">
-        <h1>Issue with this printer? Tell us what's wrong by pressing a button below.</h1>
-        <button type="button" class="button" onclick="alert('Thanks!')">Out of Paper</button>
-        <br>
-        <button type="button" class="button" onclick="alert('Thanks!')">Jammed</button>
-    </div> -->
-
+<div id="issue">
+    <h1>Problem with this printer?</h1>
+    <p> Tell us the issue by pressing a button below.</p>
     <form action="{{ url_for('add_entry') }}" method="post">
-        <input name="issue" value="Out Of Paper" type="text">
+        <!-- <input name="issue" value="Out Of Paper" type="text"> -->
         <input type="hidden" name="timestamp" id="dateBox">
-        <input type="hidden" name="printer" value="CULC printer!">
-        <input type="submit" value="Submit">
+        <input type="hidden" name="printer" id="printer">
+        <input type="submit" value="Out of Paper" name="issue">
+        <br>
+        <input type="submit" value="Jammed" name="issue">
     </form>
+</div>
     <br>
     <p> entries so far</p>
     {% for entry in tickets %}
@@ -32,7 +31,24 @@ xhtml">
     <li><em>Unbelievable.  No entries here so far</em>
     {% endfor %}
 <script type="text/javascript">
-    console.log("found ddate" + Date.now().valueOf())
+
     document.getElementById("dateBox").value = Date.now().valueOf()
+
+    function querySt(ji) {
+
+    hu = window.location.search.substring(1);
+    gy = hu.split("&");
+
+    for (i=0;i<gy.length;i++) {
+        ft = gy[i].split("=");
+        if (ft[0] == ji) {
+            return ft[1];
+        }
+    }
+}
+    var printer = querySt("printer");
+
+    document.getElementById('printer').value = printer;
+    console.log("found printer: " + printer);
 </script>
 </body>
