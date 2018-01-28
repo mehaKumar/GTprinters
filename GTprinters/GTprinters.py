@@ -61,10 +61,24 @@ def close_db(error):
 @app.route('/')
 def show_entries():
     db = get_db()
-    cur = db.execute('SELECT DISTINCT printer FROM tickets GROUP BY printer')
-    tickets = cur.fetchall()
-    # printers  = cur.fetchall()
-    return render_template('index.html', tickets=tickets)
+    cur = db.execute('SELECT * from tickets')
+    printers = cur.fetchall()
+    listOfMostRecent = []
+    for printer in printers:
+        #curr = db.execute(..)
+        #currDate = printer['date']
+        currTimestamp = printer['timestamp']
+        timeDelta = datetime.datetime.now() - datetime.timedelta(hours = 3)
+        timeDelta = timeDelta.timestamp() * 1000;
+        status = 'Out of Order'
+        if currTimestamp < timeDelta:
+            status = 'Running fine'
+        tup = (printer['printer'], status, 'gjg')
+        print(tup)
+        listOfMostRecent.append(tup)
+
+    print(listOfMostRecent)
+    return render_template('index.html', tickets=listOfMostRecent)
 
 @app.route('/issue')
 def show_issue():

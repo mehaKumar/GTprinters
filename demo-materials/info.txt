@@ -1,0 +1,14 @@
+## Inspiration
+If you've ever needed to print something in a rush, you know the annoyance of a printer being out of order. You've probably also noticed that as you walk to a different printer, other people are heading to the faulty printer. Maybe you warm them, maybe you don't. GT Printers is here to solve this issue by crowdsourcing information on printer issues. 
+## What it does
+Each printer has a unique QR code, and scanning it automatically send us a report. Users can visit our webpage to see which printers near them are faulty, and which are functional. Maintenance can use the same website to identify faulty printers at a glance.
+## How we built it
+We began by building our database using sqlite. After mastering posting and selecting using python, we linked our HTML buttons to our database using Flask. After getting the works working on a local machine, we deployed the website using pythonanywhere. After that, we tweaked our database querying to make sure we show the most relevant information to users and updated our formatting to make the website easy to read.
+## Challenges we ran into
+We weren't well-versed in the area of databases, so we had trouble learning how to select and post from the database. We also had no idea how to set up a server to run our application, or how to make HTML buttons send information to a database. Deploying the app was a challenge, as we learned the challenges of using Heroku on Windows. 
+## Accomplishments that we're proud of
+We really like the auto-fill feature: each QR code links to the same form that is pre-filled by extra information in the website link. It makes it really low-effort for users to report a problem.
+## What we learned
+We learned about all the different layers of web applications that use databases.
+## What's next for GT Printers
+Let users pull up a list or map that shows the closest printers and their status. Notify maintenance when printers are reported as faulty, with the specific issue. Making the general framework more robust and secure for real-life scaling and real-life use.
