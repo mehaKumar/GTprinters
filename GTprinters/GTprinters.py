@@ -49,7 +49,7 @@ def get_db():
     current application context.
     """
     if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = create_connection("../Printer_Data.db")
+        g.sqlite_db = create_connection("C://Users/Meha/Documents/GTprinters/Printer_Data.db")
     return g.sqlite_db
 
 @app.teardown_appcontext
@@ -71,7 +71,8 @@ def show_entries():
         timeDelta = datetime.datetime.now() - datetime.timedelta(hours = 3)
         timeDelta = timeDelta.timestamp() * 1000;
         status = 'Out of Order'
-        if currTimestamp < timeDelta:
+        print("type of currTimestamp: " + str(type(currTimestamp)) + " " + str(currTimestamp))
+        if currTimestamp < int(timeDelta):
             status = 'Running fine'
         tup = (printer['printer'], status, 'gjg')
         print(tup)
@@ -87,8 +88,9 @@ def show_issue():
 @app.route('/add_entry', methods=['POST'])
 def add_entry():
     db = get_db()
+    print("ATTNATTENTION WHOAHWOAHAHOAH" + str(datetime.datetime.now().timestamp()))
     db.execute("INSERT INTO tickets(timestamp, printer, issue, date) " + "VALUES(?,?,?,?)",
-                 [datetime.datetime.now(), request.form['printer'], request.form['issue'], datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
+                 [datetime.datetime.now().timestamp(), request.form['printer'], request.form['issue'], datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
     db.commit()
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
