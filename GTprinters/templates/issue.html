@@ -27,14 +27,14 @@ xhtml">
     <br>
     <p> entries so far</p>
     {% for entry in tickets %}
-    <li><h2>{{ entry.timestamp }}</h2>{{ entry.printer }} {{entry.issue}}
+    <li>{{ entry.timestamp }}{{ entry.printer }} {{entry.issue}}{{entry.date}}
     {% else %}
     <li><em>Unbelievable.  No entries here so far</em>
     {% endfor %}
 <script type="text/javascript">
 
-    document.getElementById("dateBox").value = Date.now().valueOf()
-    document.getElementById("date").value = Date.now().toString()
+    document.getElementById("dateBox").value = Date.now().valueOf();
+    document.getElementById("date").value = Date.now().toString();
     function querySt(ji) {
 
     hu = window.location.search.substring(1);
@@ -48,8 +48,7 @@ xhtml">
     }
 }
     var printer = querySt("printer");
-
-    document.getElementById('printer').value = printer;
     console.log("found printer: " + printer);
+    document.getElementById('printer').value = printer;
 </script>
 </body>

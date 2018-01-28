@@ -47,7 +47,7 @@ def get_db():
     current application context.
     """
     if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = create_connection("../Printer_Data.db")
+        g.sqlite_db = create_connection("C:/Users/Meha/Documents/GTprinters/Printer_Data.db")
     return g.sqlite_db
 
 @app.teardown_appcontext
@@ -61,9 +61,6 @@ def show_entries():
     db = get_db()
     cur = db.execute('select * from tickets order by timestamp desc')
     tickets = cur.fetchall()
-    for entry in tickets:
-        print(entry['timestamp'])
-
     return render_template('index.html', tickets=tickets)
 
 @app.route('/issue')
