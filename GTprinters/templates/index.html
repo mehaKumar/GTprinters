@@ -17,5 +17,17 @@ xhtml">
     {% else %}
     <li><em>Unbelievable.  No entries here so far</em>
     {% endfor %}
+    <table>
+        <tr>
+            <th>Location</th>
+            <th>Number of Recent Issues</th>
+        </tr>
+        {% for entry in tickets %}
+        <tr>
+            <th>{{entry.printer}}</th>
+            <th>{{entry.num}}</th>
+        </tr>
+        {% endfor %}
+    </table>
     </div>
 </body>
