@@ -1,6 +1,7 @@
 # all the imports
 import os
 import sqlite3
+import datetime
 from sqlite3 import Error
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
@@ -47,7 +48,7 @@ def get_db():
     current application context.
     """
     if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = create_connection("C:/Users/Meha/Documents/GTprinters/Printer_Data.db")
+        g.sqlite_db = create_connection("../Printer_Data.db")
     return g.sqlite_db
 
 @app.teardown_appcontext
@@ -71,7 +72,7 @@ def show_issue():
 def add_entry():
     db = get_db()
     db.execute("INSERT INTO tickets(timestamp, printer, issue, date) " + "VALUES(?,?,?,?)",
-                 [request.form['timestamp'], request.form['printer'], request.form['issue'], request.form['date']])
+                 [request.form['timestamp'], request.form['printer'], request.form['issue'], datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")])
     db.commit()
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
