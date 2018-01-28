@@ -19,7 +19,7 @@ xhtml">
     </div> -->
 
     <form action="{{ url_for('add_entry') }}" method=post>
-        <input name="issue" value="Out Of Paper" type="button">
+        <input name="issue" value="Out Of Paper" type="submit">
         <input type="hidden" name="timestamp" value=Date.now()>
         <input type="hidden" name="printer" value="CULC printer!">
     </form>

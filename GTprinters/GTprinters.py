@@ -40,15 +40,31 @@ def initdb_command():
     print('Initialized the database.')
 
 def get_db():
-"""Opens a new database connection if there is none yet for the
-current application context.
-"""
-if not hasattr(g, 'sqlite_db'):
-    g.sqlite_db = create_connection()
-return g.sqlite_db
+    """Opens a new database connection if there is none yet for the
+    current application context.
+    """
+    if not hasattr(g, 'sqlite_db'):
+        g.sqlite_db = create_connection("Printer_Data.db")
+    return g.sqlite_db
 
 @app.teardown_appcontext
 def close_db(error):
     """Closes the database again at the end of the request."""
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
+
+@app.route('/')
+def show_entries():
+    db = get_db()
+    cur = db.execute('select title, text from entries order by timestamp desc')
+    entries = cur.fetchall()
+    return render_template('show_entries.html', entries=entries)
+
+@app.route('/add', methods=['POST'])
+def add_entry():
+    db = get_db()
+    db.execute("INSERT INTO tickets(timestamp, printer, issue) " + "VALUES(?,?,?)",
+                 [request.form['timestamp'], request.form['printer'], request.form['issue']])
+    db.commit()
+    flash('New entry was successfully posted')
+    return redirect(url_for('show_entries'))

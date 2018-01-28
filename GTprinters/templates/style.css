@@ -1,0 +1,28 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0em;
+    height: 100%
+}
+
+#issue {
+    background-color: #EAAA00;
+    color: #00254c;
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    margin-top: 0;
+    padding-top: 5em;
+}
+.button {
+        background-color:  #00263A;
+        padding: 1em;
+        font-size: 30px;
+        border: none;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+        margin: .5em;
+
+    } .button:hover {
+        background-color: #335170;
+    }
