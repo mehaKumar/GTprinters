@@ -7,3 +7,6 @@ GTprinters.egg-info/SOURCES.txt
 GTprinters.egg-info/dependency_links.txt
 GTprinters.egg-info/requires.txt
 GTprinters.egg-info/top_level.txt
+GTprinters/static/style.css
+GTprinters/templates/index.html
+GTprinters/templates/issue.html

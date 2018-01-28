@@ -1,0 +1,1 @@
+web: gunicorn GTprinters:app --log-file=-
