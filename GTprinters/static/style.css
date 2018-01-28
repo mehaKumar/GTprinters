@@ -12,12 +12,12 @@ p {
     background-color: #EAAA00;
     color: #00254c;
     text-align: center;
-    height: 100vh;
-    width: 100vw;
+    height: 95vh;
+    width: 100%;
     margin-top: 0;
-    padding-top: 5em;
+    padding-top: 2em;
     overflow: hidden;
-    position: fixed;
+    /* float: left; */
 }
 li {
     list-style-type: none;

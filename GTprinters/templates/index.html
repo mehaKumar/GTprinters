@@ -15,17 +15,17 @@ xhtml">
 
 <body>
  <div id="homepage">
-    <h1 style="font-size: 4em;">GT Printers</h1>
+    <h1 style="font-size: 7em; margin-top: 0">GT Printers</h1>
     <div align= "center" >
-    <table style="text-align: left;">
+    <table style= "font-size: 2em">
         <tr>
             <th>Location</th>
             <th>Number of Recent Issues</th>
         </tr>
         {% for entry in tickets %}
         <tr>
-            <th>{{entry.printer}}</th>
-            <th>{{entry.num}}</th>
+            <th style="text-align:left">{{entry.printer}}</th>
+            <th style="text-align:right">{{entry.num}}</th>
         </tr>
         {% endfor %}
     </table>
