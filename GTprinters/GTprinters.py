@@ -59,8 +59,9 @@ def close_db(error):
 @app.route('/')
 def show_entries():
     db = get_db()
-    cur = db.execute('select * from tickets order by timestamp desc')
+    cur = db.execute('SELECT printer, count(*) as NUM FROM tickets GROUP BY printer')
     tickets = cur.fetchall()
+    print(tickets[1].keys())
     return render_template('index.html', tickets=tickets)
 
 @app.route('/issue')

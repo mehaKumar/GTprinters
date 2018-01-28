@@ -24,13 +24,7 @@ xhtml">
         <input type="submit" value="Jammed" name="issue">
     </form>
 </div>
-    <br>
-    <p> entries so far</p>
-    {% for entry in tickets %}
-    <li>{{ entry.timestamp }}{{ entry.printer }} {{entry.issue}}{{entry.date}}
-    {% else %}
-    <li><em>Unbelievable.  No entries here so far</em>
-    {% endfor %}
+
 <script type="text/javascript">
 
     document.getElementById("dateBox").value = Date.now().valueOf();
